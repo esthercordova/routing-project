@@ -1,11 +1,14 @@
 'use strict';
 
-// user require with a reference to bundle the file and use it in this file
-// var example = require('./example');
-
-// use require without a reference to ensure a file is bundled
 const router = require('./router/index');
+
+//useMiddleware should only be used once
+router.useMiddleware(require('./router/dom').transition);
+
+const routerEvents = require('./router/events');
 
 $(() => {
   router.start();
+
+  routerEvents.addHandlers();
 });
